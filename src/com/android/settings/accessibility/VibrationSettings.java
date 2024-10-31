@@ -18,11 +18,16 @@ package com.android.settings.accessibility;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.os.Bundle;
 import android.os.Vibrator;
+import android.provider.DeviceConfig;
+import android.provider.Settings;
 
 import androidx.annotation.VisibleForTesting;
+import androidx.preference.Preference;
 
 import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
@@ -34,6 +39,28 @@ import com.android.settingslib.search.SearchIndexable;
 public class VibrationSettings extends DashboardFragment {
 
     private static final String TAG = "VibrationSettings";
+
+    @Override
+    public void onCreate(Bundle icicle) {
+        super.onCreate(icicle);
+
+        if (!Utils.isVoiceCapable(getContext()) || !getHasRampingRinger()) {
+            Preference rampingDuration = findPreference(
+                    Settings.System.RAMPING_RINGER_DURATION);
+            Preference rampingVolume = findPreference(
+                    Settings.System.RAMPING_RINGER_START_VOLUME);
+            Preference noSilence = findPreference(
+                    Settings.System.RAMPING_RINGER_NO_SILENCE);
+            rampingDuration.setVisible(false);
+            rampingVolume.setVisible(false);
+            noSilence.setVisible(false);
+        }
+    }
+
+    private boolean getHasRampingRinger() {
+        return DeviceConfig.getBoolean(DeviceConfig.NAMESPACE_TELEPHONY,
+                "ramping_ringer_enabled", false);
+    }
 
     @Override
     public int getMetricsCategory() {

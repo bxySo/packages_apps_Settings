@@ -22,9 +22,12 @@ import android.hardware.display.AmbientDisplayConfiguration;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.display.TapToWakePreferenceController;
 import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.search.SearchIndexable;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @SearchIndexable
@@ -56,6 +59,13 @@ public class GestureSettings extends DashboardFragment {
         use(PickupGesturePreferenceController.class).setConfig(getConfig(context));
         use(DoubleTapScreenPreferenceController.class).setConfig(getConfig(context));
         use(ScreenOffUdfpsPreferenceController.class).setConfig(getConfig(context));
+    }
+
+    @Override
+    protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
+        final List<AbstractPreferenceController> controllers = new ArrayList<>();
+        controllers.add(new TapToWakePreferenceController(context));
+        return controllers;
     }
 
     private AmbientDisplayConfiguration getConfig(Context context) {

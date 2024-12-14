@@ -41,6 +41,7 @@ import com.android.settings.display.AmbientDisplayAlwaysOnPreferenceController;
 import com.android.settings.display.AmbientDisplayAlwaysOnSchedulePreferenceController;
 import com.android.settings.display.AmbientDisplayNotificationsPreferenceController;
 import com.android.settings.display.AmbientDisplayCustomPreferenceController;
+import com.android.settings.display.TapToWakePreferenceController;
 import com.android.settings.gestures.DoubleTapScreenPreferenceController;
 import com.android.settings.gestures.PickupGesturePreferenceController;
 import com.android.settings.gestures.ScreenOffUdfpsPreferenceController;
@@ -196,6 +197,7 @@ public class LockscreenDashboardFragment extends DashboardFragment
         controllers.add(notificationController);
         mOwnerInfoPreferenceController = new OwnerInfoPreferenceController(context, this);
         controllers.add(mOwnerInfoPreferenceController);
+        controllers.add(new TapToWakePreferenceController(context));
 
         return controllers;
     }

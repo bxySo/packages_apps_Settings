@@ -25,7 +25,7 @@ import com.android.settingslib.core.AbstractPreferenceController;
 public class TapToWakePreferenceController extends AbstractPreferenceController implements
         PreferenceControllerMixin, Preference.OnPreferenceChangeListener {
 
-    private static final String KEY_TAP_TO_WAKE = "tap_to_wake";
+    public static final String KEY_TAP_TO_WAKE = "tap_to_wake";
 
     public TapToWakePreferenceController(Context context) {
         super(context);
@@ -36,10 +36,14 @@ public class TapToWakePreferenceController extends AbstractPreferenceController 
         return KEY_TAP_TO_WAKE;
     }
 
+    public static boolean isAvailable(Context context) {
+        return context.getResources().getBoolean(
+                com.android.internal.R.bool.config_supportDoubleTapWake);
+    }
+
     @Override
     public boolean isAvailable() {
-        return mContext.getResources().getBoolean(
-                com.android.internal.R.bool.config_supportDoubleTapWake);
+        return isAvailable(mContext);
     }
 
     @Override

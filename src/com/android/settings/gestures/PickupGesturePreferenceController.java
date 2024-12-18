@@ -46,6 +46,7 @@ public class PickupGesturePreferenceController extends TogglePreferenceControlle
     private static final int ON = 1;
     private static final int OFF = 0;
 
+    public static final String KEY = "gesture_pick_up_input_summary";
     private static final String SECURE_KEY = DOZE_PICK_UP_GESTURE;
     private static final String AMBIENT_SECURE_KEY = "doze_pick_up_gesture_ambient";
 
@@ -73,6 +74,11 @@ public class PickupGesturePreferenceController extends TogglePreferenceControlle
         AmbientDisplayConfiguration ambientConfig = new AmbientDisplayConfiguration(context);
         return prefs.getBoolean(PickupGestureSettings.PREF_KEY_SUGGESTION_COMPLETE, false)
                 || !ambientConfig.dozePickupSensorAvailable();
+    }
+
+    public static boolean isAvailable(Context context) {
+        return (new AmbientDisplayConfiguration(context))
+                .dozePickupSensorAvailable();
     }
 
     @Override

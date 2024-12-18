@@ -42,6 +42,7 @@ import com.android.settingslib.PrimarySwitchPreference;
 public class TapScreenGesturePreferenceController extends TogglePreferenceController
         implements LifecycleObserver, OnStart, OnStop {
 
+    public static final String KEY = "gesture_tap";
     private static final String SECURE_KEY = DOZE_TAP_SCREEN_GESTURE;
     private static final String AMBIENT_SECURE_KEY = "doze_tap_gesture_ambient";
 
@@ -56,6 +57,11 @@ public class TapScreenGesturePreferenceController extends TogglePreferenceContro
         super(context, key);
         mUserId = UserHandle.myUserId();
         mAmbientConfig = new AmbientDisplayConfiguration(context);
+    }
+
+    public static boolean isAvailable(Context context) {
+        return (new AmbientDisplayConfiguration(context))
+                .tapSensorAvailable();
     }
 
     @Override

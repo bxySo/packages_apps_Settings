@@ -47,6 +47,7 @@ public class DoubleTapScreenPreferenceController extends TogglePreferenceControl
     private final int ON = 1;
     private final int OFF = 0;
 
+    public static final String KEY = "gesture_double_tap_screen_input_summary";
     private static final String SECURE_KEY = DOZE_DOUBLE_TAP_GESTURE;
     private static final String AMBIENT_SECURE_KEY = "doze_double_tap_gesture_ambient";
 
@@ -76,6 +77,11 @@ public class DoubleTapScreenPreferenceController extends TogglePreferenceControl
             SharedPreferences prefs) {
         return !config.doubleTapSensorAvailable()
                 || prefs.getBoolean(DoubleTapScreenSettings.PREF_KEY_SUGGESTION_COMPLETE, false);
+    }
+
+    public static boolean isAvailable(Context context) {
+        return (new AmbientDisplayConfiguration(context))
+                .doubleTapSensorAvailable();
     }
 
     @Override

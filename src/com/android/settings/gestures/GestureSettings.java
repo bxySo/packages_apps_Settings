@@ -82,6 +82,18 @@ public class GestureSettings extends DashboardFragment {
                     final List<String> keys = super.getNonIndexableKeys(context);
                     // de-duplicated due to another same entry in Sound page
                     keys.add(PREF_KEY_PREVENT_RINGING);
+                    if (!TapToWakePreferenceController.isAvailable(context)) {
+                        keys.add(TapToWakePreferenceController.KEY_TAP_TO_WAKE);
+                    }
+                    if (!DoubleTapScreenPreferenceController.isAvailable(context)) {
+                        keys.add(DoubleTapScreenPreferenceController.KEY);
+                    }
+                    if (!TapScreenGesturePreferenceController.isAvailable(context)) {
+                        keys.add(TapScreenGesturePreferenceController.KEY);
+                    }
+                    if (!PickupGesturePreferenceController.isAvailable(context)) {
+                        keys.add(PickupGesturePreferenceController.KEY);
+                    }
                     return keys;
                 }
             };

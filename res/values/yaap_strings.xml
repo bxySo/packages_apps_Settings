@@ -696,7 +696,11 @@
 
     <!-- Long press navbar to search -->
     <string name="navbar_long_press_gesture_title">Long press to search</string>
-    <string name="navbar_long_press_gesture_summary">Long press the gesture bar to analyze the screen with lens</string>
+    <string name="navbar_long_press_gesture_summary">Long press the gesture bar to analyze the screen</string>
+
+    <!-- Circle to search -->
+    <string name="search_all_entrypoints_enabled_title">Circle to search</string>
+    <string name="search_all_entrypoints_enabled_summary">Use CTS instead of lens for navbar long press</string>
 
     <!-- SystemUI tuner -->
     <string name="statusbar_icons_title">Icons</string>
